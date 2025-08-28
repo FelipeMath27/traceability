@@ -1,0 +1,66 @@
+package com.pragma.traceability.domain.utils;
+
+
+public class ConstantsErrorMessages {
+
+    /**Constants to users*/
+    public static final String PERMISSION_DENIED = "You do not have permission to create users.";
+    public static final String USER_UNDERAGE = "The user must be of legal age.";
+    public static final String USER_NOT_FOUND = "User not found in the platform";
+    public static final String ADMIN_NOT_FOUND = "User admin not found in the system";
+    public static final String USER_WITHOUT_ROLE = "This user has not role";
+    public static final String USER_NOT_SAVED = "User not saved in the system";
+
+    /**Constant to Rol*/
+    public static final String ROL_REQUIRED = "No role was provided for the creator user.";
+    public static final String ROL_NOT_FOUND = "The rol provided is not exist";
+    public static final String INVALID_ROLE = "Invalid role to create de user";
+    public static final String IS_NOT_EMPLOYEE = "The user is not an employee, so it cannot be created as such.";
+
+    /**Parameters*/
+    public static final String INVALID_EMAIL_FORMAT = "The email is not in a valid format.";
+    public static final String INVALID_PHONE_FORMAT = "The phone number must have a maximum of 13 characters and may include '+'.";
+    public static final String INVALID_DOCUMENT_FORMAT = "The document format is invalid. Please provide a valid document number based on the document type.";
+    public static final String PASSWORD_CANNOT_BE_EMPTY = "Password cannot be null or empty";
+    public static final String NAME_CANT_BE_NULL = "User name can't be null";
+    public static final String LAST_NAME_CANT_BE_NULL = "User lastname can't be null";
+
+    /**General constants*/
+    public static final String CANT_BE_NULL = "This parameter can't be null";
+    public static final String INVALID_ID = "This id is invalid";
+
+    /**Constants to logs*/
+    public static final String START_FLOW = "Start flow";
+    public static final String START_VALIDATE_CREATOR_USER = "Start to validate creator user";
+    public static final String START_VALIDATE_OWNER = "Start to validate owner user";
+    public static final String START_PROCESS_TO_VALIDATE_CONDITION = "Start process to validate requirements";
+    public static final String END_SUCCESSFUL_FLOW = "End flow successful";
+    public static final String END_VALIDATE_SUCCESSFUL_FLOW = "End validate flow successful";
+    public static final String START_TO_CREATE_OWNER = "Start process to create a new owner";
+    public static final String LISTENER_OK_CONTROLLER = "Controller listen to the HTTP method OK";
+    public static final String START_TO_CREATE_ADMIN = "Start process to create a new admin";
+    public static final String START_VALIDATE_EMPLOYEE = "Start to validate rol employee";
+    public static final String START_TO_CREATE_EMPLOYEE = "Start process to create a new employee";
+
+
+    /**Authentication constant*/
+
+    public static final String START_AUTHENTICATION_FLOW = "Handler get the request to authentication";
+    public static final String ERROR_TO_VERIFY_PASSWORD = "Incorrect password, try again";
+    public static final String ERROR_TO_GENERATE_TOKEN = "There is a problem to generate a new token";
+    public static final String EXPIRED_TOKEN = "Token has expired";
+    public static final String ERROR_TO_VALIDATE_TOKEN = "There is a error to validate token JWT";
+    public static final String VALID_TOKEN = "This JWT token is valid";
+    public static final String CONSTANT_HEADER_AUTHENTICATION = "Authorization";
+    public static final String BEARER_PREFIX = "Bearer ";
+    public static final int BEARER_SUBSTRING = 7;
+
+    /**Constants to Client*/
+    public static final String START_TO_CREATE_CLIENT = "Start process to create a new client";
+    public static final String START_TO_VALIDATE_CLIENT = "Start to validate rol client";
+    public static final String CLIENT_NOT_FOUND = "Client not found in the platform";
+
+
+    private ConstantsErrorMessages() {
+    }
+}
