@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
 @Slf4j
-public class TraceabilityUseCase implements ITraceabilityServicePort {
+public class UseCaseTraceability implements ITraceabilityServicePort {
 
     private final ITraceabilityPersistencePort iTraceabilityPersistencePort;
     private static final StatusOrderValidators statusOrderValidators = new StatusOrderValidators();
