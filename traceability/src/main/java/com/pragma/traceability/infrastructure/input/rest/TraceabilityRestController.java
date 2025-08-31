@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TraceabilityRestController {
     private final ITraceabilityHandler iTraceabilityHandler;
 
-    @PostMapping
+    @PostMapping("/create-traceability")
     public ResponseEntity<TraceabilityDTOResponse> createTraceability(@Valid @RequestBody TraceabilityDTORequest traceabilityDTORequest) {
         log.info(ConstantInfrastructure.LISTENER_CONTROLLER_START);
         TraceabilityDTOResponse traceabilityDTOResponse
