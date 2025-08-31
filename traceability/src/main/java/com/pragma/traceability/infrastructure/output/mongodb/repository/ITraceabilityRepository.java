@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface ITraceabilityRepository extends MongoRepository<TraceabilityEntity, String> {
     List<TraceabilityEntity> findByIdOrder(Long idOrder);
-    Optional<TraceabilityEntity> findTopByIdOrderOrderByDateDesc(Long idOrder);
+    Optional<TraceabilityEntity> findTopByIdOrderOrderByDateTraceabilityDesc(Long idOrder);
 }

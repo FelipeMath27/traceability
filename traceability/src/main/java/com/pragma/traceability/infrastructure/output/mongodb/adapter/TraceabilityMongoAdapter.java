@@ -31,7 +31,7 @@ public class TraceabilityMongoAdapter implements ITraceabilityPersistencePort {
 
     @Override
     public Optional<Traceability> findLastTraceabilityByIdOrder(Long idOrder) {
-        return iTraceabilityRepository.findTopByIdOrderOrderByDateDesc(idOrder)
+        return iTraceabilityRepository.findTopByIdOrderOrderByDateTraceabilityDesc(idOrder)
                 .map(iTraceabilityEntityMapper::toTraceability);
     }
 }

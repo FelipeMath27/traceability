@@ -18,6 +18,6 @@ public class TraceabilityDTOResponse {
     private LocalDateTime dateTraceability;
     private StatusOrder previousStatus;
     private StatusOrder newStatus;
-    private Long employeeUser;
+    private Long idEmployee;
     private String emailEmployee;
 }

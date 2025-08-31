@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document(collation = "traceability_logs")
+@Document(collection = "traceability_logs")
 public class TraceabilityEntity {
 
     @Id

@@ -28,8 +28,6 @@ public class TraceabilityDTORequest {
     @Email(message = ConstantsErrorMessages.EMAIL_INVALID)
     private String emailClient;
 
-    private LocalDateTime dateTraceability;
-
     @NotNull(message = ConstantsErrorMessages.STATUS_IS_REQUIRED)
     private StatusOrder newStatus;
 
