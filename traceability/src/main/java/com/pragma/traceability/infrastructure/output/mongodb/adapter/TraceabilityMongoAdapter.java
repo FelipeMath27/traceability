@@ -4,6 +4,7 @@ import com.pragma.traceability.domain.exception.DomainException;
 import com.pragma.traceability.domain.model.Traceability;
 import com.pragma.traceability.domain.spi.ITraceabilityPersistencePort;
 import com.pragma.traceability.domain.utils.ConstantsErrorMessages;
+import com.pragma.traceability.infrastructure.output.mongodb.entity.TraceabilityEntity;
 import com.pragma.traceability.infrastructure.output.mongodb.mapper.ITraceabilityEntityMapper;
 import com.pragma.traceability.infrastructure.output.mongodb.repository.ITraceabilityRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,16 +23,14 @@ public class TraceabilityMongoAdapter implements ITraceabilityPersistencePort {
 
     @Override
     public Traceability save(Traceability traceability) {
-        return Optional.ofNullable(traceability)
-                .map(iTraceabilityEntityMapper::toEntity)
-                .map(iTraceabilityRepository::save)
-                .map(iTraceabilityEntityMapper::toTraceability)
-                .orElseThrow(()-> new DomainException(ConstantsErrorMessages.FAILED_TO_SAVE_TRACEABILITY));
+        TraceabilityEntity entity = iTraceabilityEntityMapper.toEntity(traceability);
+        TraceabilityEntity saved = iTraceabilityRepository.save(entity);
+        return iTraceabilityEntityMapper.toDomain(saved);
     }
 
     @Override
     public Optional<Traceability> findLastTraceabilityByIdOrder(Long idOrder) {
         return iTraceabilityRepository.findTopByIdOrderOrderByDateTraceabilityDesc(idOrder)
-                .map(iTraceabilityEntityMapper::toTraceability);
+                .map(iTraceabilityEntityMapper::toDomain);
     }
 }

@@ -1,5 +1,6 @@
 package com.pragma.traceability.infrastructure.output.mongodb.entity;
 
+import com.pragma.traceability.domain.model.StatusOrder;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -20,8 +21,8 @@ public class TraceabilityEntity {
     private Long idClient;
     private String emailClient;
     private LocalDateTime dateTraceability;
-    private String previousStatus;
-    private String newStatus;
+    private StatusOrder previousStatus;
+    private StatusOrder newStatus;
     private Long idEmployee;
     private String emailEmployee;
 }

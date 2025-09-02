@@ -13,17 +13,17 @@ public class StatusOrderValidators {
     static {
         VALID_TRANSITIONS.put(StatusOrder.PENDING, Set.of(StatusOrder.IN_PROGRESS, StatusOrder.REJECTED));
         VALID_TRANSITIONS.put(StatusOrder.IN_PROGRESS, Set.of(StatusOrder.DISH_READY, StatusOrder.REJECTED));
-        VALID_TRANSITIONS.put(StatusOrder.DISH_READY, Set.of(StatusOrder.DISPATCHED, StatusOrder.REJECTED));
-        VALID_TRANSITIONS.put(StatusOrder.DISPATCHED, Set.of(StatusOrder.DELIVERED, StatusOrder.REJECTED));
+        VALID_TRANSITIONS.put(StatusOrder.DISH_READY, Set.of(StatusOrder.DELIVERED, StatusOrder.REJECTED));
         VALID_TRANSITIONS.put(StatusOrder.DELIVERED, Set.of());
         VALID_TRANSITIONS.put(StatusOrder.REJECTED, Set.of());
     }
 
     public boolean isValidTransition(StatusOrder previous, StatusOrder next) {
-        return Optional.ofNullable(previous)
-                .map(prev -> Optional.ofNullable(VALID_TRANSITIONS.get(prev))
-                        .map(nextStates -> nextStates.contains(next))
-                        .orElse(false))
-                .orElse(next == StatusOrder.PENDING);
+        if (previous == null) {
+            return true;
+        }
+        return Optional.ofNullable(VALID_TRANSITIONS.get(previous))
+                .map(nextStates -> nextStates.contains(next))
+                .orElse(false);
     }
 }

@@ -28,24 +28,21 @@ public class UseCaseTraceability implements ITraceabilityServicePort {
                     StatusOrder previous = lastTraceability.getNewStatus();
                     StatusOrder next = traceability.getNewStatus();
 
-                    if(!statusOrderValidators.isValidTransition(previous, next)) {
+                    if (!statusOrderValidators.isValidTransition(previous, next)) {
                         throw new DomainException(ConstantsErrorMessages.STATUS_INVALID_TO_CREATE_TRACEABILITY);
                     }
 
                     return persistTraceability(traceability, previous);
                 })
                 .orElseGet(() -> {
-                    if(!StatusOrder.PENDING.equals(traceability.getNewStatus())) {
-                        throw new DomainException(ConstantsErrorMessages.FIRST_TRACEABILITY_MUST_BE_PENDING);
-                    }
-
-                    return persistTraceability(traceability, null);
+                    return persistTraceability(traceability, StatusOrder.PENDING);
                 });
     }
 
     private Traceability persistTraceability(Traceability traceability, StatusOrder previous) {
         traceability.setPreviousStatus(previous);
         traceability.setDateTraceability(LocalDateTime.now());
+        log.info(">>> Traceability to save: {}", String.valueOf(traceability));
         return iTraceabilityPersistencePort.save(traceability);
     }
 }
