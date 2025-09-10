@@ -1,9 +1,6 @@
 package com.pragma.traceability.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -16,8 +13,8 @@ public class Traceability {
     private Long idOrder;
     private Long idClient;
     private String emailClient;
+    private LocalDateTime startOrderTraceability;
     private LocalDateTime dateTraceability;
-    private StatusOrder previousStatus;
     private StatusOrder newStatus;
     private Long idEmployee;
     private String emailEmployee;

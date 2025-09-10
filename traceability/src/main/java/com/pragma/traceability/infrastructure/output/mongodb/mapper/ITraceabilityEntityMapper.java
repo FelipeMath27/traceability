@@ -9,11 +9,9 @@ import org.mapstruct.Mapping;
         unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE,
         unmappedSourcePolicy = org.mapstruct.ReportingPolicy.IGNORE)
 public interface ITraceabilityEntityMapper {
-    @Mapping(target = "previousStatus", source = "previousStatus")
     @Mapping(target = "newStatus", source = "newStatus")
     TraceabilityEntity toEntity(Traceability traceability);
 
-    @Mapping(target = "previousStatus", source = "previousStatus")
     @Mapping(target = "newStatus", source = "newStatus")
     Traceability toDomain(TraceabilityEntity entity);
 }

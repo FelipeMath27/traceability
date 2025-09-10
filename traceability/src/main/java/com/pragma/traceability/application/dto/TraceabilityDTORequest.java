@@ -36,5 +36,4 @@ public class TraceabilityDTORequest {
     @NotBlank(message = ConstantsErrorMessages.EMAIL_REQUIRED)
     @Email(message = ConstantsErrorMessages.EMAIL_INVALID)
     private String emailEmployee;
-
 }

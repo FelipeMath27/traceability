@@ -20,8 +20,8 @@ public class TraceabilityEntity {
     private Long idOrder;
     private Long idClient;
     private String emailClient;
+    private LocalDateTime startOrderTraceability;
     private LocalDateTime dateTraceability;
-    private StatusOrder previousStatus;
     private StatusOrder newStatus;
     private Long idEmployee;
     private String emailEmployee;

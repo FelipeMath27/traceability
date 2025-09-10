@@ -1,5 +1,6 @@
 package com.pragma.traceability.domain.spi;
 
+import com.pragma.traceability.domain.model.StatusOrder;
 import com.pragma.traceability.domain.model.Traceability;
 
 import java.util.Optional;
@@ -7,4 +8,5 @@ import java.util.Optional;
 public interface ITraceabilityPersistencePort {
     Traceability save(Traceability traceability);
     Optional<Traceability> findLastTraceabilityByIdOrder(Long idOrder);
+    Optional<Traceability> getTraceabilityByIdOrderAndStatus(Long idOrder, StatusOrder statusOrder);
 }

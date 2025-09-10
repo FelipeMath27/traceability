@@ -30,12 +30,43 @@ class TraceabilityTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        traceabilityOne = new Traceability("32132112", 1L, 1L, "felipe@gmail.com",
-                LocalDateTime.now(), null, StatusOrder.PENDING, 1L, "felipe2@gmail.com");
-        traceabilityTwo = new Traceability("2312321", 2L, 2L, "sdfs@gmail.com", LocalDateTime.now(),
-                StatusOrder.PENDING, StatusOrder.DISPATCHED, 2L, "sfsf2@gmail.com");
-        traceabilitynew = new Traceability("32132112", 1L, 1L, "felipe@gmail.com",
-                LocalDateTime.now(), null, StatusOrder.IN_PROGRESS, 1L, "felipe2@gmail.com");
+        LocalDateTime now = LocalDateTime.now();
+
+        traceabilityOne = new Traceability(
+                "32132112",
+                1L,
+                1L,
+                "felipe@gmail.com",
+                now.minusMinutes(30),
+                now.minusMinutes(30),
+                StatusOrder.PENDING,
+                1L,
+                "felipe2@gmail.com"
+        );
+
+        traceabilityTwo = new Traceability(
+                "2312321",
+                2L,
+                2L,
+                "sdfs@gmail.com",
+                now.minusMinutes(40),
+                now,
+                StatusOrder.DISPATCHED,
+                2L,
+                "sfsf2@gmail.com"
+        );
+
+        traceabilitynew = new Traceability(
+                "32132112",
+                1L,
+                1L,
+                "felipe@gmail.com",
+                null,
+                now.minusMinutes(10),
+                StatusOrder.IN_PROGRESS,
+                1L,
+                "felipe2@gmail.com"
+        );
     }
 
     @Test
@@ -60,12 +91,17 @@ class TraceabilityTest {
 
     @Test
     void saveTraceability_previousStatusIsInProgress_newStatusIsReady() {
+        Traceability traceability = new Traceability(null,1L,1L,"felipe@gmail.com",null,
+                null,StatusOrder.DELIVERED,1L,"felipe2@gmail.com");
         traceabilitynew.setNewStatus(StatusOrder.DISH_READY);
-        when(iTraceabilityPersistencePort.findLastTraceabilityByIdOrder(2L)).thenReturn(Optional.ofNullable(traceabilitynew));
-        when(iTraceabilityPersistencePort.save(traceabilityTwo)).thenReturn(traceabilityTwo);
-        Traceability traceabilitySaved = useCaseTraceability.saveTraceability(traceabilityTwo);
+        Traceability originTraceablity = new Traceability("23112321",1L,1L,"felipe@gmail.com",LocalDateTime.now().minusMinutes(30),
+                LocalDateTime.now().minusMinutes(30),StatusOrder.PENDING,1L,"felipe2@gmail.com");
+        when(iTraceabilityPersistencePort.findLastTraceabilityByIdOrder(traceability.getIdOrder())).thenReturn(Optional.ofNullable(traceabilitynew));
+        when(iTraceabilityPersistencePort.getTraceabilityByIdOrderAndStatus(1L,StatusOrder.PENDING)).thenReturn(Optional.of(originTraceablity));
+        when(iTraceabilityPersistencePort.save(traceability)).thenReturn(traceability);
+        Traceability traceabilitySaved = useCaseTraceability.saveTraceability(traceability);
         assertNotNull(traceabilitySaved);
-        assertEquals(StatusOrder.DISPATCHED, traceabilitySaved.getNewStatus());
-        verify(iTraceabilityPersistencePort, times(1)).save(traceabilityTwo);
+        assertEquals(StatusOrder.DELIVERED, traceabilitySaved.getNewStatus());
+        verify(iTraceabilityPersistencePort, times(1)).save(traceability);
     }
 }

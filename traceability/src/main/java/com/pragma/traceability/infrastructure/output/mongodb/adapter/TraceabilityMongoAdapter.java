@@ -1,6 +1,7 @@
 package com.pragma.traceability.infrastructure.output.mongodb.adapter;
 
 import com.pragma.traceability.domain.exception.DomainException;
+import com.pragma.traceability.domain.model.StatusOrder;
 import com.pragma.traceability.domain.model.Traceability;
 import com.pragma.traceability.domain.spi.ITraceabilityPersistencePort;
 import com.pragma.traceability.domain.utils.ConstantsErrorMessages;
@@ -31,6 +32,12 @@ public class TraceabilityMongoAdapter implements ITraceabilityPersistencePort {
     @Override
     public Optional<Traceability> findLastTraceabilityByIdOrder(Long idOrder) {
         return iTraceabilityRepository.findTopByIdOrderOrderByDateTraceabilityDesc(idOrder)
+                .map(iTraceabilityEntityMapper::toDomain);
+    }
+
+    @Override
+    public Optional<Traceability> getTraceabilityByIdOrderAndStatus(Long idOrder, StatusOrder statusOrder) {
+        return iTraceabilityRepository.findFirstByIdOrderAndNewStatus(idOrder,statusOrder)
                 .map(iTraceabilityEntityMapper::toDomain);
     }
 }
